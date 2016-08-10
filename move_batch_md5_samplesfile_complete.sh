@@ -10,10 +10,15 @@ echo ""
 cd /share/CACHEDEV1_DATA/eleanor/1kgenomes/fastq/
 mkdir source_fastqs
 #Move files into one directory
-lib=("lib144" "lib2" "lib30" "lib38" "lib4" "lib42" "lib44" "lib46") 
+lib=("lib144" "lib2" "lib30" "lib38" "lib4" "lib42" "lib44" "lib46" "lib4_part2") 
 for library in ${lib[@]}; do
   cd ${lib}
-  mv . /share/CACHEDEV1_DATA/eleanor/1kgenomes/fastq/source_fastqs
+  samples_file=$(cat *"samples.txt")
+  for sample in ${samples_file}; do
+    cd ${sample}
+    cp *fastq.gz /share/CACHEDEV1_DATA/eleanor/1kgenomes/fastq/source_fastqs
+    cd /share/CACHEDEV1_DATA/eleanor/1kgenomes/fastq/${lib}
+  done
   cd /share/CACHEDEV1_DATA/eleanor/1kgenomes/fastq/
 done
 
